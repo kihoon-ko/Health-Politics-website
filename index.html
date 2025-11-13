@@ -93,9 +93,14 @@
             transition: all 0.3s ease;
         }
 
-        .submit-btn:hover {
+        .submit-btn:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(49, 130, 206, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         .sub-nav-button {
@@ -174,7 +179,7 @@
         }
 
         .step-item:after {
-            content: '→';
+            content: 'â†'';
             color: var(--color-accent);
             position: absolute;
             right: -1.25rem;
@@ -194,7 +199,7 @@
                 margin-right: 0;
             }
             .step-item:after {
-                content: '↓';
+                content: 'â†"';
                 right: 50%;
                 top: auto;
                 bottom: -1.75rem;
@@ -246,6 +251,10 @@
             height: 30px;
             stroke-width: 2;
         }
+
+        .disabled-button {
+            cursor: not-allowed;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
     
@@ -254,10 +263,10 @@
 
     <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-50 border-b-2 border-gray-200">
-        <nav class="container mx-auto px-4 md:px-8 py-4 max-w-7xl">
-            <div class="flex flex-col lg:flex-row justify-between items-center">
+        <nav class="container mx-auto px-4 md:px-4 py-4 max-w-6xl">
+            <div class="flex flex-col lg:flex-row justify-between items-center lg:gap-1">
                 <!-- Journal Title -->
-                <div class="mb-4 lg:mb-0">
+                <div class="mb-4 lg:mb-0 flex-shrink-0">
                     <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 font-serif tracking-tight">
                         Health Politics
                     </h1>
@@ -265,31 +274,31 @@
                 </div>
 
                 <!-- Navigation & Submit Button (Using hp- prefixed data-targets) -->
-                <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
-                    <div class="flex flex-wrap space-x-6 border-b-2 lg:border-b-0 pb-2 lg:pb-0">
-                        <button class="nav-button active font-semibold text-gray-700" data-target="hp-overview">Overview</button>
-                        <button class="nav-button font-semibold text-gray-700" data-target="hp-authors">For Authors</button>
-                        <button class="nav-button font-semibold text-gray-700" data-target="hp-reviewers">For Reviewers</button>
-                        <button class="nav-button font-semibold text-gray-700" data-target="hp-process">Review Process</button>
-                        <button class="nav-button font-semibold text-gray-700" data-target="hp-information">Policies</button>
-                        <button class="nav-button font-semibold text-gray-700" data-target="hp-about">About</button>
+                <div class="flex flex-col lg:flex-row items-center gap-1 lg:gap-2 flex-1 lg:justify-end">
+                    <div class="flex flex-wrap space-x-3 border-b-2 lg:border-b-0 pb-2 lg:pb-0 justify-center">
+                        <button class="nav-button active font-semibold text-gray-700 text-base" data-target="hp-overview">Overview</button>
+                        <button class="nav-button font-semibold text-gray-700 text-base" data-target="hp-authors">For Authors</button>
+                        <button class="nav-button font-semibold text-gray-700 text-base" data-target="hp-reviewers">For Reviewers</button>
+                        <button class="nav-button font-semibold text-gray-700 text-base" data-target="hp-process">Review Process</button>
+                        <button class="nav-button font-semibold text-gray-700 text-base" data-target="hp-information">Policies</button>
+                        <button class="nav-button font-semibold text-gray-700 text-base" data-target="hp-about">About</button>
                     </div>
-                    <!-- Submission button link updated to OJS (from Prospectus) and opens in a new tab -->
-                    <a href="https://submission.healthpolitics.net" target="_blank" rel="noopener noreferrer" class="submit-btn text-white font-semibold px-6 py-2.5 rounded-lg whitespace-nowrap">
+                    <!-- Submission button - disabled until page is ready -->
+                    <button class="submit-btn text-white font-semibold px-4 py-2 rounded-lg whitespace-nowrap disabled-button text-sm ml-4" disabled title="Submission system coming soon">
                         Submit Manuscript
-                    </a>
+                    </button>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main class="container mx-auto px-4 md:px-8 max-w-7xl">
+    <main class="container mx-auto px-4 md:px-4 max-w-7xl">
 
         <!-- Overview Section (Using hp- prefixed ID) -->
         <section id="hp-overview" class="page-section active py-8">
             
             <!-- Hero Section -->
-            <div class="hero-section rounded-xl mb-8 px-8 py-12">
+            <div class="hero-section rounded-xl mb-12 px-8 py-12">
                 <div class="max-w-4xl mx-auto text-center">
                     <h2 class="text-4xl font-bold mb-4 text-white">Advancing Scholarship on the Politics of Health</h2>
                     <p class="text-xl text-blue-200 mb-6">
@@ -305,7 +314,7 @@
             </div>
 
             <!-- Aims & Scope -->
-            <div class="academic-card mb-8">
+            <div class="academic-card mb-8 mt-16">
                 <h2 class="text-2xl md:text-3xl font-bold mb-6">Aims & Scope</h2>
                 <p class="text-lg text-gray-700 leading-relaxed mb-4">
                     <strong class="font-bold">Health Politics</strong> provides a multidisciplinary platform across <strong class="font-bold">political science, public health, sociology, economics, and ethics</strong> to advance scholarly understanding of how political processes, institutions, ideologies, and power structures shape health outcomes, health systems, and population well-being.
@@ -364,12 +373,12 @@
                     We welcome all manuscript types (especially Original Research Articles and Theoretical Articles) that align with the journal's Aims & Scope.
                 </p>
                 <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mt-6">
-                    <p class="font-semibold text-blue-900">📅 Submission Deadline: January 31, 2026</p>
+                    <p class="font-semibold text-blue-900">📅 Submission Deadline: December 31, 2025</p>
                 </div>
                 <div class="mt-6 text-center">
-                    <a href="https://submission.healthpolitics.net" target="_blank" rel="noopener noreferrer" class="submit-btn inline-block text-white font-semibold px-8 py-3 rounded-lg text-lg">
+                    <button class="submit-btn inline-block text-white font-semibold px-8 py-3 rounded-lg text-lg disabled-button" disabled title="Submission system coming soon">
                         Submit Your Manuscript
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -404,8 +413,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                     <div>
                         <h4 class="text-xl font-semibold border-b-2 border-gray-300 pb-3 mb-4 font-serif">Associate Editors</h4>
+                        <p class="text-sm text-gray-500 italic mb-4">Being updated...</p>
                         <ul class="space-y-2 text-gray-700">
-                            <li><strong>Joan Benach</strong> – <em class="text-gray-600">Universitat Pompeu Fabra, Spain</em></li>
                             <li><strong>Virginia Gunn</strong> – <em class="text-gray-600">Cape Breton University, Canada</em></li>
                             <li><strong>Lauri Kokkinen</strong> – <em class="text-gray-600">University of Helsinki, Finland</em></li>
                             <li><strong>Edwin Ng</strong> – <em class="text-gray-600">University of Waterloo, Canada</em></li>
@@ -414,15 +423,26 @@
                     </div>
                     <div>
                         <h4 class="text-xl font-semibold border-b-2 border-gray-300 pb-3 mb-4 font-serif">Editorial Board</h4>
+                        <p class="text-sm text-gray-500 italic mb-4">Being updated...</p>
                         <ul class="space-y-2 text-gray-700">
+                            <li><strong>Seye Abimbola</strong> – <em class="text-gray-600">University of Sydney, Australia</em></li>
+                            <li><strong>Clare Bambra</strong> – <em class="text-gray-600">Newcastle University, UK</em></li>
+                            <li><strong>Insa Linnea Backhaus-Hoven</strong> – <em class="text-gray-600">Norwegian University of Science and Technology, Norway</em></li>
+                            <li><strong>Joan Benach</strong> – <em class="text-gray-600">Universitat Pompeu Fabra, Spain</em></li>
                             <li><strong>Bo Burström</strong> – <em class="text-gray-600">Karolinska Institutet, Sweden</em></li>
                             <li><strong>Patrick Fafard</strong> – <em class="text-gray-600">University of Ottawa, Canada</em></li>
                             <li><strong>Pablo Gálvez Fernández</strong> – <em class="text-gray-600">University of Toronto, Canada</em></li>
                             <li><strong>Benjamin Goodair</strong> – <em class="text-gray-600">The London School of Economics and Political Science, UK</em></li>
                             <li><strong>Patrick Hassenteufel</strong> – <em class="text-gray-600">University of Versailles/Sciences Po, France</em></li>
                             <li><strong>Wonmo Jang</strong> – <em class="text-gray-600">Seoul National University, Republic of Korea</em></li>
+                            <li><strong>Helen Jordan</strong> – <em class="text-gray-600">University of Melbourne, Australia</em></li>
                             <li><strong>Rockli Kim</strong> – <em class="text-gray-600">Korea University, Republic of Korea</em></li>
+                            <li><strong>Saerom Kim</strong> – <em class="text-gray-600">Inje University, Republic of Korea</em></li>
                             <li><strong>Julia Lynch</strong> – <em class="text-gray-600">University of Pennsylvania, USA</em></li>
+                            <li><strong>Shai Mulinari</strong> – <em class="text-gray-600">Lund University, Sweden</em></li>
+                            <li><strong>Laura Sochas</strong> – <em class="text-gray-600">University of Edinburgh, UK</em></li>
+                            <li><strong>Monika Steffen</strong> – <em class="text-gray-600">Grenoble Alpes University, France</em></li>
+                            <li><strong>Young-jeon Shin</strong> – <em class="text-gray-600">Hanyang University, Republic of Korea</em></li>
                         </ul>
                     </div>
                 </div>
@@ -431,8 +451,7 @@
                     <h4 class="text-xl font-semibold border-b-2 border-gray-300 pb-3 mb-4 font-serif">Editorial Consultants</h4>
                     <p class="text-gray-700 mb-4">A panel of distinguished experts offering advisory input on emerging topics, ethical standards, and regional representation.</p>
                     <ul class="space-y-2 text-gray-700">
-                        <li><strong>Saerom Kim</strong> – <em class="text-gray-600">Inje University, South Korea</em></li>
-                        <li><strong>Daseul Moon</strong> – <em class="text-gray-600">People's Health Institute, South Korea</em></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -471,12 +490,12 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-white p-6 rounded-lg border border-blue-200 shadow-sm">
                             <h4 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">Word Count</h4>
-                            <p id="article-wordcount" class="text-3xl font-bold text-blue-900 mb-2">6,000–8,000</p>
+                            <p id="article-wordcount" class="text-3xl font-bold text-blue-900 mb-2">6,000â€"8,000</p>
                             <p id="article-wordcount-notes" class="text-sm text-gray-600">Excludes abstract, references, tables, and figures.</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg border border-blue-200 shadow-sm">
                             <h4 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">Abstract</h4>
-                            <p id="article-abstract" class="text-3xl font-bold text-blue-900">Mandatory (250–300 words)</p>
+                            <p id="article-abstract" class="text-3xl font-bold text-blue-900">Mandatory (250â€"300 words)</p>
                         </div>
                     </div>
                 </div>
@@ -486,9 +505,9 @@
             <div class="academic-card bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center">
                 <h3 class="text-2xl font-bold mb-4 text-white">Ready to Submit Your Research?</h3>
                 <p class="text-lg mb-6 text-blue-200">Join our community of scholars advancing the politics of health globally.</p>
-                <a href="https://submission.healthpolitics.net" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-blue-600 font-bold px-8 py-3 rounded-lg text-lg hover:bg-gray-100 transition-all">
+                <button class="inline-block bg-white text-blue-600 font-bold px-8 py-3 rounded-lg text-lg hover:bg-gray-100 transition-all disabled-button" disabled title="Submission system coming soon">
                     Go to Submission System →
-                </a>
+                </button>
             </div>
 
             <!-- APC Policy -->
@@ -571,65 +590,18 @@
         <section id="hp-process" class="page-section py-8">
             <div class="academic-card">
                 <h2 class="text-2xl md:text-3xl font-bold mb-6">Editorial Process & Peer Review</h2>
-                <p class="text-lg text-gray-700 leading-relaxed mb-8"> Our editorial process ensures timely, fair, and rigorous evaluation of all submissions. Explore our review timelines, workflows, and ethical standards below. </p>
+                <p class="text-lg text-gray-700 leading-relaxed mb-8">Our editorial process ensures timely, fair, and rigorous evaluation of all submissions. Explore our review timelines and ethical standards below.</p>
                 
-                <!-- Sub Navigation -->
-                <div class="flex flex-wrap border-b-2 border-gray-300 mb-8 gap-2">
-                    <button class="sub-nav-button active font-semibold py-3 px-5 rounded-t-lg" data-target="hp-proc-overview">Review Timeline</button>
-                    <button class="sub-nav-button font-semibold py-3 px-5 rounded-t-lg" data-target="hp-proc-ae">AE Workflow</button>
-                    <button class="sub-nav-button font-semibold py-3 px-5 rounded-t-lg" data-target="hp-proc-ethics">Publication Ethics</button>
+                <!-- Service Level Targets -->
+                <h3 class="text-2xl font-bold mb-6 font-serif">Service Level Targets (SLA)</h3>
+                <p class="text-gray-700 mb-6">We are committed to timely decisions. These are our target timelines from submission:</p>
+                <div class="chart-container mb-8">
+                    <canvas id="slaChart"></canvas>
                 </div>
+                <p class="text-center text-sm text-gray-600 mb-8">Note: Full peer review times may vary based on reviewer availability and manuscript complexity. Major revision authors are targeted 8–10 weeks for reply; minor revision authors 3–4 weeks.</p>
 
-                <!-- Timeline (Using hp- prefixed ID) -->
-                <div id="hp-proc-overview" class="sub-page-section">
-                    <h3 class="text-2xl font-bold mb-4 font-serif">Service Level Targets (SLA)</h3>
-                    <p class="text-gray-700 mb-6">We are committed to timely decisions. These are our target timelines from submission:</p>
-                    <div class="chart-container mb-6">
-                        <canvas id="slaChart"></canvas>
-                    </div>
-                    <p class="text-center text-sm text-gray-600">Note: Full peer review times may vary based on reviewer availability and manuscript complexity. Major revision authors are targeted 8–10 weeks for reply; minor revision authors 3–4 weeks.</p>
-                </div>
-
-                <!-- AE Workflow (Using hp- prefixed ID) -->
-                <div id="hp-proc-ae" class="sub-page-section" style="display: none;">
-                    <h3 class="text-2xl font-bold mb-6 font-serif">Associate Editor (AE) Workflow</h3>
-                    <p class="text-gray-700 mb-8">AEs serve as handling editors and quality stewards, guiding manuscripts through our 6-step review process:</p>
-                    <div class="flex flex-col lg:flex-row justify-between space-y-6 lg:space-y-0 lg:space-x-4 mb-8">
-                        <div class="relative flex-1 text-center p-6 border-l-4 lg:border-l-0 lg:border-t-4 step-item rounded-lg">
-                            <span class="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">Step 1</span>
-                            <h4 class="font-bold text-lg mt-3 font-serif">Intake & COI Check</h4>
-                            <p class="text-sm text-gray-600 mt-2">Confirm no conflicts of interest (Day 0-2)</p>
-                        </div>
-                        <div class="relative flex-1 text-center p-6 border-l-4 lg:border-l-0 lg:border-t-4 step-item rounded-lg">
-                            <span class="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">Step 2</span>
-                            <h4 class="font-bold text-lg mt-3 font-serif">Desk Triage</h4>
-                            <p class="text-sm text-gray-600 mt-2">Apply checklist; decide on review (Day 0-7)</p>
-                        </div>
-                        <div class="relative flex-1 text-center p-6 border-l-4 lg:border-l-0 lg:border-t-4 step-item rounded-lg">
-                            <span class="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">Step 3</span>
-                            <h4 class="font-bold text-lg mt-3 font-serif">Reviewer Selection</h4>
-                            <p class="text-sm text-gray-600 mt-2">Invite 3-5 diverse reviewers (Day 3-10)</p>
-                        </div>
-                        <div class="relative flex-1 text-center p-6 border-l-4 lg:border-l-0 lg:border-t-4 step-item rounded-lg">
-                            <span class="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">Step 4</span>
-                            <h4 class="font-bold text-lg mt-3 font-serif">Monitor & Remind</h4>
-                            <p class="text-sm text-gray-600 mt-2">Send reminders at 7/14 days; replace unresponsive invitees.</p>
-                        </div>
-                        <div class="relative flex-1 text-center p-6 border-l-4 lg:border-l-0 lg:border-t-4 step-item rounded-lg">
-                            <span class="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">Step 5</span>
-                            <h4 class="font-bold text-lg mt-3 font-serif">Synthesis & Memo</h4>
-                            <p class="text-sm text-gray-600 mt-2">Write balanced decision memo with anchor reasons.</p>
-                        </div>
-                        <div class="relative flex-1 text-center p-6 border-l-4 lg:border-l-0 lg:border-t-4 step-item rounded-lg">
-                            <span class="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">Step 6</span>
-                            <h4 class="font-bold text-lg mt-3 font-serif">Decision Recommendation</h4>
-                            <p class="text-sm text-gray-600 mt-2">Recommend Accept / Minor / Major Rev / Reject to Co-EICs.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Publication Ethics (Using hp- prefixed ID) -->
-                <div id="hp-proc-ethics" class="sub-page-section" style="display: none;">
+                <!-- Publication Ethics -->
+                <div class="border-t pt-8">
                     <h3 class="text-2xl font-bold mb-6 font-serif">Publication Ethics & Integrity</h3>
                     <ul class="space-y-4 text-gray-700">
                         <li class="p-4 bg-gray-50 rounded-lg border border-gray-200">
@@ -742,11 +714,7 @@
                     <p class="text-gray-700 mb-4"><strong>International Standard Serial Number (ISSN):</strong> The journal will be registered with the International Standard Serial Number Center. Official numbers will be updated upon securing.</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-6 rounded-lg border border-gray-200">
                         <div>
-                            <h4 class="font-semibold text-gray-800">Print ISSN</h4>
-                            <p class="text-gray-600 italic">[To be inserted upon securing]</p>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-gray-800">Online ISSN</h4>
+                            <h4 class="font-semibold text-gray-800">Online ISSN (eISSN)</h4>
                             <p class="text-gray-600 italic">[To be inserted upon securing]</p>
                         </div>
                     </div>
